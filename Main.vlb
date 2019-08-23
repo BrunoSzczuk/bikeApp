@@ -1,0 +1,8 @@
+﻿[]
+Coordinates=81,1,48,33
+
+[Module Settings]
+ModelLayerNames=velocidade;NewLayer1
+ActiveLayerNames=NewLayer1
+EditingLayerName=velocidade
+
