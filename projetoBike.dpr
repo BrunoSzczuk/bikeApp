@@ -1,7 +1,7 @@
-program Bike_Delphi;
+program projetoBike;
 
 uses
-  Vcl.Forms,
+  Forms,
   Main in 'Main.pas' {Form1};
 
 {$R *.res}
