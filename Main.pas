@@ -10,7 +10,6 @@ uses
 type
   TForm1 = class(TForm)
     velocimetro1: TAdvSmoothGauge;
-    Button1: TButton;
     ComPort1: TComPort;
     Timer1: TTimer;
     distancia1: TAdvSmoothLedLabel;
@@ -20,9 +19,8 @@ type
     winner2: TImage;
     Label2: TLabel;
     winner1: TImage;
-    Button2: TButton;
     distanciaPercorrida1: TAdvSmoothProgressBar;
-    AdvSmoothProgressBar2: TAdvSmoothProgressBar;
+    AdvSmoothProgressBar1: TAdvSmoothProgressBar;
     function converteDeStringParaAscii(Texto: String): byte;
     function leUmValorParaAscii(Count: integer): byte;
     procedure ComPort1RxChar(Sender: TObject; Count: integer);
@@ -34,6 +32,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Timer1Timer(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+
   private
     Dados: array [0 .. 9] of integer;
     competidor1_distancia: Extended;
@@ -66,6 +68,8 @@ var
 
 implementation
 
+uses frmConfig;
+
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   ComPort1.Connected := not ComPort1.Connected;
@@ -74,6 +78,28 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+var
+  valor: integer;
+begin
+  ComPort1.Connected := true;
+  valor := 1;
+  ComPort1.Write(valor, 1);
+
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+var
+  valor: integer;
+begin
+  ComPort1.Connected := true;
+  valor := 2;
+  ComPort1.Write(valor, 2);
+  Sleep(30);
+  valor := 1;
+  ComPort1.Write(valor, 1);
 end;
 
 procedure TForm1.ComPort1RxChar(Sender: TObject; Count: integer);
@@ -110,7 +136,7 @@ begin
         competidor1_distanciaAnterior := competidor1_distancia;
         velocimetro1.Value := vel;
         distanciaPercorrida1.Position := competidor1_distancia;
-        //distanciaPercorrida2.Position := competidor2_distancia;
+        // distanciaPercorrida2.Position := competidor2_distancia;
         if (competidor1_distancia >= DISTANCIA) then
           distancia1.Caption.Value := DISTANCIA
         else if (competidor2_distancia >= DISTANCIA) then
@@ -125,6 +151,27 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   ComPort1.Connected := false;
+end;
+
+procedure TForm1.FormKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  // f1
+  if (Key = 112) then
+    Button3Click(self);
+  // f2
+  if (Key = 113) then
+    Button4Click(self);
+  // f5
+  if (Key = 116) then
+  begin
+    ufrmConfig.Show;
+  end;
+  // f6
+  if (Key = 117) then
+  begin
+    ComPort1.ShowSetupDialog;
+  end;
+
 end;
 
 function TForm1.geraTamanho( low, high: integer): Extended;

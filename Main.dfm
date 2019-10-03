@@ -11,7 +11,9 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object distancia1: TAdvSmoothLedLabel
@@ -483,6 +485,7 @@ object Form1: TForm1
       A00A00A00A00A00A00A00A00A00A01AE1F47C51C92CA880492953230E2DB0A11
       2FE005A8075401401401401401401401407FFFD9}
     Proportional = True
+    Transparent = True
     Visible = False
   end
   object Label2: TLabel
@@ -904,6 +907,7 @@ object Form1: TForm1
       A00A00A00A00A00A00A00A00A00A01AE1F47C51C92CA880492953230E2DB0A11
       2FE005A8075401401401401401401401407FFFD9}
     Proportional = True
+    Transparent = True
     Visible = False
   end
   object velocimetro1: TAdvSmoothGauge
@@ -949,15 +953,6 @@ object Form1: TForm1
     TabOrder = 0
     TMSStyle = 4
   end
-  object Button1: TButton
-    Left = 31
-    Top = 262
-    Width = 75
-    Height = 25
-    Caption = 'Ligar/Desligar'
-    TabOrder = 1
-    OnClick = Button1Click
-  end
   object velocimetro2: TAdvSmoothGauge
     Left = 212
     Top = 44
@@ -998,23 +993,14 @@ object Form1: TForm1
     Version = '2.3.1.0'
     Sections = <>
     ExtraNeedles = <>
-    TabOrder = 2
+    TabOrder = 1
     TMSStyle = 4
   end
-  object Button2: TButton
-    Left = 103
-    Top = 262
-    Width = 75
-    Height = 25
-    Caption = 'Fechar'
-    TabOrder = 3
-    OnClick = Button2Click
-  end
   object distanciaPercorrida1: TAdvSmoothProgressBar
-    Left = 154
+    Left = 140
     Top = 42
     Width = 23
-    Height = 112
+    Height = 126
     Step = 10.000000000000000000
     Maximum = 1000.000000000000000000
     Appearance.BackGroundFill.Color = 16765615
@@ -1048,17 +1034,16 @@ object Form1: TForm1
     Appearance.ProgressFont.Height = -9
     Appearance.ProgressFont.Name = 'Tahoma'
     Appearance.ProgressFont.Style = []
-    Appearance.ValueFormat = '%n'
-    Appearance.ValueVisible = True
+    Appearance.ValueFormat = '%.0f%%'
     Version = '1.9.0.3'
     Direction = pbdVertical
     TMSStyle = 4
   end
-  object AdvSmoothProgressBar2: TAdvSmoothProgressBar
-    Left = 178
+  object AdvSmoothProgressBar1: TAdvSmoothProgressBar
+    Left = 182
     Top = 42
     Width = 23
-    Height = 112
+    Height = 126
     Step = 10.000000000000000000
     Maximum = 1000.000000000000000000
     Appearance.BackGroundFill.Color = 16765615
@@ -1072,10 +1057,10 @@ object Form1: TForm1
     Appearance.BackGroundFill.Rounding = 0
     Appearance.BackGroundFill.ShadowOffset = 0
     Appearance.BackGroundFill.Glow = gmNone
-    Appearance.ProgressFill.Color = clLime
-    Appearance.ProgressFill.ColorTo = clLime
-    Appearance.ProgressFill.ColorMirror = clLime
-    Appearance.ProgressFill.ColorMirrorTo = clLime
+    Appearance.ProgressFill.Color = 9841920
+    Appearance.ProgressFill.ColorTo = 9841920
+    Appearance.ProgressFill.ColorMirror = 9841920
+    Appearance.ProgressFill.ColorMirrorTo = 9841920
     Appearance.ProgressFill.GradientType = gtBackwardDiagonal
     Appearance.ProgressFill.GradientMirrorType = gtVertical
     Appearance.ProgressFill.BorderColor = 16765357
@@ -1092,8 +1077,7 @@ object Form1: TForm1
     Appearance.ProgressFont.Height = -9
     Appearance.ProgressFont.Name = 'Tahoma'
     Appearance.ProgressFont.Style = []
-    Appearance.ValueFormat = '%n'
-    Appearance.ValueVisible = True
+    Appearance.ValueFormat = '%.0f%%'
     Version = '1.9.0.3'
     Direction = pbdVertical
     TMSStyle = 4
@@ -1119,6 +1103,7 @@ object Form1: TForm1
     Top = 185
   end
   object Timer1: TTimer
+    Enabled = False
     OnTimer = Timer1Timer
     Left = 129
     Top = 185
